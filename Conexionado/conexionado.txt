@@ -1,0 +1,23 @@
+El Arduino se alimenta directamente a través del puerto USB de la computadora, que le proporciona una tensión estable de 5 V suficiente para su funcionamiento y el del botónDe manera independiente, el servomotor recibe energía desde una fuente regulable de 6 V, conectada directamente a sus terminales de alimentación (VCC y GND).
+
+Esta separación entre la alimentación del control y la del actuador evita que los picos de corriente del motor afecten al microcontrolador, lo cual es fundamental para mantener un funcionamiento estable.
+
+Ambas alimentaciones comparten una tierra común (GND), lo que permite que el Arduino y el servo utilicen la misma referencia eléctrica. Gracias a esto, la señal de control enviada por el pin digital 9 del Arduino puede ser interpretada correctamente por el servo.
+
+Sobre la línea de alimentación del motor se colocó un condensador electrolítico de 1500 µF / 10 V, cercano al componente, para reducir fluctuaciones de tensión y evitar que las variaciones de carga afecten al sistema.
+
+El botón pulsador, conectado al pin digital 2 con una resistencia de 1 kΩ en configuración pull-down, cumple la función de activar el sistema.
+
+Cuando está en reposo, el pin permanece en nivel lógico bajo (0 V), y al presionarlo, el Arduino detecta un nivel alto (5 V), lo que equivale a una orden de inicio del ciclo de limpieza.
+
+Al recibir esta señal, el microcontrolador ejecuta el programa almacenado y envía una señal PWM (modulación por ancho de pulso) al servomotor a través del pin 9.
+
+Dicha señal controla el ángulo del eje, haciendo que el servo gire desde 0° hasta 180° y luego regrese a su posición inicial.
+
+Este movimiento reproduce el proceso de limpieza del arenero: la rotación del filtro que separa la arena limpia de los desechos sólidos.
+
+Cabe destacar que el sistema opera bajo un control en lazo abierto, ya que el Arduino no recibe retroalimentación sobre la posición real del servomotor ni verifica si la acción se completó correctamente.
+
+El control se limita a ejecutar la secuencia programada en respuesta a la entrada del botón, lo que simplifica el diseño y facilita su implementación en un prototipo funcional.
+
+En conjunto, el circuito logra integrar los elementos esenciales de un sistema mecatrónico: entrada, procesamiento y salida, coordinados a través de un control secuencial simple y confiable.
